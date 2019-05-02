@@ -76,6 +76,8 @@ namespace AutoClicker
 		{
 			mouse_event(MOUSEEVENTF_LEFTDOWN, 0, 0, 0, 0);
 			mouse_event(MOUSEEVENTF_LEFTUP, 0, 0, 0, 0);
+			window.Topmost = true;
+
 		}
 	}
 }
