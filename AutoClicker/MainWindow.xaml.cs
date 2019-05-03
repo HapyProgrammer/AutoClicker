@@ -40,6 +40,7 @@ namespace AutoClicker
 		public static extern void mouse_event(int dwFlags, int dx, int dy, int cButtons,int dwExtraInfo);
 
 		private int counter = 0;
+		private double cPS = 1;
 		private bool clicked = false;
 		private DispatcherTimer dt = new DispatcherTimer();
 
@@ -48,7 +49,8 @@ namespace AutoClicker
 			clicked = true;
 			if (clicked)
 			{
-				dt.Interval = TimeSpan.FromMilliseconds(50);
+				double seconds = 1 / cPS;
+				dt.Interval = TimeSpan.FromSeconds(seconds);
 				dt.Tick += dtTicker;
 				dt.Start();
 			}
@@ -78,6 +80,14 @@ namespace AutoClicker
 			mouse_event(MOUSEEVENTF_LEFTUP, 0, 0, 0, 0);
 			window.Topmost = true;
 
+		}
+
+		private void CPSSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+		{
+			Slider cpsSlider = sender as Slider;
+			cPS = cpsSlider.Value;
+			int intCPS = (int)cPS;
+			ClicksIndicatorText.Text = intCPS.ToString();
 		}
 	}
 }
